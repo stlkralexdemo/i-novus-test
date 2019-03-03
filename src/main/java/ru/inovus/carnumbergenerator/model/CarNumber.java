@@ -3,6 +3,7 @@ package ru.inovus.carnumbergenerator.model;
 import static ru.inovus.carnumbergenerator.service.CarNumberService.addZero;
 
 public class CarNumber {
+
     private static final String PAST = "116 RUS";
 
     private String firstLetter;
@@ -46,5 +47,12 @@ public class CarNumber {
     @Override
     public String toString() {
         return firstLetter + addZero(number) + secondLetter + thirdLetter + " " + PAST;
+    }
+
+    public CarNumber(String firstLetter, String secondLetter, String thirdLetter, int number) {
+        this.firstLetter = firstLetter;
+        this.secondLetter = secondLetter;
+        this.thirdLetter = thirdLetter;
+        this.number = number;
     }
 }

@@ -1,9 +1,8 @@
 package ru.inovus.carnumbergenerator.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.inovus.carnumbergenerator.model.CarNumber;
 import ru.inovus.carnumbergenerator.service.CarNumberService;
 
 
@@ -11,26 +10,24 @@ import ru.inovus.carnumbergenerator.service.CarNumberService;
 public class CarNumberController {
 
     private final CarNumberService service;
-    private CarNumber carNumber;
 
     @Autowired
     public CarNumberController(CarNumberService service) {
         this.service = service;
     }
 
-    @RequestMapping("/number")
+    @GetMapping("/number")
     public String welcome() {
         return "Welcome to Car Number Generator";
     }
 
-    @RequestMapping(value = "/number/random")
+    @GetMapping(value = "/number/random")
     public String random() {
-        carNumber = service.randomNumber();
-        return carNumber.toString();
+        return service.randomNumber().toString();
     }
 
-    @RequestMapping(value = "/number/next")
+    @GetMapping(value = "/number/next")
     public String next() {
-        return service.nextNumber(carNumber).toString();
+        return service.nextNumber().toString();
     }
 }

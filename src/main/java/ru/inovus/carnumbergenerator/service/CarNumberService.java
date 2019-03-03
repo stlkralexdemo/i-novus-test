@@ -5,39 +5,42 @@ import ru.inovus.carnumbergenerator.model.CarNumber;
 
 import java.util.Arrays;
 import java.util.Random;
+
 @Service
 public class CarNumberService {
 
     private static final String[] LETTERS = {"А", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
 
-    public CarNumber randomNumber() {
+    CarNumber carNumber = new CarNumber("А", "А", "А", 0);
 
-        CarNumber carNumber = new CarNumber();
+    public String randomNumber() {
 
         int min = 1;
         int max = 999;
 
-        Random random = new Random();
-        carNumber.setNumber(random.nextInt(max - min) + min);
+        Random rn = new Random();
+        carNumber.setNumber(rn.nextInt(max - min) + min);
 
-        carNumber.setFirstLetter(LETTERS[random.nextInt(LETTERS.length)]);
-        carNumber.setSecondLetter(LETTERS[random.nextInt(LETTERS.length)]);
-        carNumber.setThirdLetter(LETTERS[random.nextInt(LETTERS.length)]);
+        carNumber.setFirstLetter(LETTERS[rn.nextInt(LETTERS.length)]);
+        carNumber.setSecondLetter(LETTERS[rn.nextInt(LETTERS.length)]);
+        carNumber.setThirdLetter(LETTERS[rn.nextInt(LETTERS.length)]);
 
-        return carNumber;
+        return carNumber.toString();
     }
 
-    public CarNumber nextNumber(CarNumber carNumber) {
+    public String nextNumber() {
+
+        String lastLetter = LETTERS[LETTERS.length - 1];
 
         if (carNumber.getNumber() < 999) {
             carNumber.setNumber(carNumber.getNumber() + 1);
-        } else if (!carNumber.getThirdLetter().equals("Х")) {
+        } else if (!carNumber.getThirdLetter().equals(lastLetter)) {
             carNumber.setThirdLetter(LETTERS[Arrays.asList(LETTERS).indexOf(carNumber.getThirdLetter()) + 1]);
             carNumber.setNumber(1);
-        } else if (!carNumber.getSecondLetter().equals("Х")) {
+        } else if (!carNumber.getSecondLetter().equals(lastLetter)) {
             carNumber.setSecondLetter(LETTERS[Arrays.asList(LETTERS).indexOf(carNumber.getSecondLetter()) + 1]);
             carNumber.setNumber(1);
-        } else if (!carNumber.getFirstLetter().equals("Х")) {
+        } else if (!carNumber.getFirstLetter().equals(lastLetter)) {
             carNumber.setFirstLetter(LETTERS[Arrays.asList(LETTERS).indexOf(carNumber.getFirstLetter()) + 1]);
             carNumber.setNumber(1);
         } else {
@@ -46,7 +49,7 @@ public class CarNumberService {
             carNumber.setSecondLetter(carNumber.getFirstLetter());
             carNumber.setThirdLetter(carNumber.getFirstLetter());
         }
-        return carNumber;
+        return carNumber.toString();
     }
 
     public static String addZero(int num) {
