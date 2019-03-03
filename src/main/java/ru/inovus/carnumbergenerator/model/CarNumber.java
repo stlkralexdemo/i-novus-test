@@ -3,13 +3,13 @@ package ru.inovus.carnumbergenerator.model;
 import static ru.inovus.carnumbergenerator.service.CarNumberService.addZero;
 
 public class CarNumber {
-    private final String past = "116 RUS";
+    private static final String PAST = "116 RUS";
 
     private String firstLetter;
     private String secondLetter;
     private String thirdLetter;
 
-    private int num;
+    private int number;
 
     public String getFirstLetter() {
         return firstLetter;
@@ -35,16 +35,16 @@ public class CarNumber {
         this.thirdLetter = thirdLetter;
     }
 
-    public int getNum() {
-        return num;
+    public int getNumber() {
+        return number;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     @Override
     public String toString() {
-        return firstLetter + addZero(num) + secondLetter + thirdLetter + " " + past;
+        return firstLetter + addZero(number) + secondLetter + thirdLetter + " " + PAST;
     }
 }
