@@ -1,15 +1,16 @@
 package ru.inovus.carnumbergenerator.service;
 
+import org.springframework.stereotype.Service;
 import ru.inovus.carnumbergenerator.model.CarNumber;
 
 import java.util.Arrays;
 import java.util.Random;
-
+@Service
 public class CarNumberService {
 
     private static final String[] LETTERS = {"А", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
 
-    public static CarNumber randomNumber() {
+    public CarNumber randomNumber() {
 
         CarNumber carNumber = new CarNumber();
 
@@ -26,7 +27,7 @@ public class CarNumberService {
         return carNumber;
     }
 
-    public static CarNumber nextNumber(CarNumber carNumber) {
+    public CarNumber nextNumber(CarNumber carNumber) {
 
         if (carNumber.getNumber() < 999) {
             carNumber.setNumber(carNumber.getNumber() + 1);
