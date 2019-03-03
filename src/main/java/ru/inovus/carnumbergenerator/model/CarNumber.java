@@ -1,7 +1,5 @@
 package ru.inovus.carnumbergenerator.model;
 
-import static ru.inovus.carnumbergenerator.service.CarNumberService.addZero;
-
 public class CarNumber {
 
     private static final String PAST = "116 RUS";
@@ -55,4 +53,13 @@ public class CarNumber {
         this.thirdLetter = thirdLetter;
         this.number = number;
     }
+
+    private String addZero(int num) {
+        if (num > 99) {
+            return String.valueOf(num);
+        } else if (num > 9) {
+            return "0" + num;
+        } else return "00" + num;
+    }
+
 }
