@@ -18,7 +18,6 @@ public class CarNumberService {
 
     public CarNumberService(RandomCarNumberRepository repository) {
         this.repository = repository;
-        repository.add(carNumber);
     }
 
     public String randomNumber() {

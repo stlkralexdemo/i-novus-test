@@ -1,5 +1,7 @@
 package ru.inovus.carnumbergenerator.model;
 
+import java.util.Objects;
+
 public class CarNumber {
 
     private static final String PAST = "116 RUS";
@@ -62,4 +64,19 @@ public class CarNumber {
         } else return "00" + num;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarNumber carNumber = (CarNumber) o;
+        return number == carNumber.number &&
+                firstLetter.equals(carNumber.firstLetter) &&
+                secondLetter.equals(carNumber.secondLetter) &&
+                thirdLetter.equals(carNumber.thirdLetter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstLetter, secondLetter, thirdLetter, number);
+    }
 }
