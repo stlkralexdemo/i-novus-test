@@ -17,4 +17,8 @@ public class RandomCarNumberRepository {
     public boolean contains(CarNumber carNumber) {
         return this.randomNumberList.indexOf(carNumber) >= 0;
     }
+
+    public int size(){
+        return randomNumberList.size();
+    }
 }
