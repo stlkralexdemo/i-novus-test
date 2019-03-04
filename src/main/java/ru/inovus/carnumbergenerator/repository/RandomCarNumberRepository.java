@@ -8,11 +8,7 @@ import java.util.*;
 @Repository
 public class RandomCarNumberRepository {
 
-    public RandomCarNumberRepository(List<CarNumber> randomNumberList) {
-        this.randomNumberList = randomNumberList;
-    }
-
-    private List<CarNumber>randomNumberList = new ArrayList<>();
+    private final List<CarNumber>randomNumberList = new ArrayList<>();
 
     public void add(CarNumber carNumber) {
         this.randomNumberList.add(carNumber);

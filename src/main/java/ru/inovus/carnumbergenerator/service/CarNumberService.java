@@ -16,35 +16,32 @@ public class CarNumberService {
 
     private CarNumber carNumber = new CarNumber("А", "А", "А", 0);
 
-    private List<CarNumber> randomNumberList = new ArrayList<>();
+    private final RandomCarNumberRepository repository;
 
-
-//    private final RandomCarNumberRepository repository;
-//
-//    public CarNumberService(RandomCarNumberRepository repository) {
-//        this.repository = repository;
-//    }
+    public CarNumberService(RandomCarNumberRepository repository) {
+        this.repository = repository;
+        repository.add(carNumber);
+    }
 
     public String randomNumber() {
 
-        randomNumberList.add(carNumber);
+        int min = 1;
+        int max = 999;
 
-        if (randomNumberList.contains(carNumber)) {
+        Random rn = new Random();
+        carNumber.setNumber(rn.nextInt(max - min) + min);
+
+        carNumber.setFirstLetter(LETTERS[rn.nextInt(LETTERS.length)]);
+        carNumber.setSecondLetter(LETTERS[rn.nextInt(LETTERS.length)]);
+        carNumber.setThirdLetter(LETTERS[rn.nextInt(LETTERS.length)]);
+
+        CarNumber randomCarNumber = new CarNumber(carNumber.getFirstLetter(), carNumber.getSecondLetter(), carNumber.getThirdLetter(), carNumber.getNumber());
+
+        if (repository.contains(randomCarNumber)) {
             randomNumber();
-        } else {
+        } else repository.add(randomCarNumber);
 
-            int min = 1;
-            int max = 999;
-
-            Random rn = new Random();
-            carNumber.setNumber(rn.nextInt(max - min) + min);
-
-            carNumber.setFirstLetter(LETTERS[rn.nextInt(LETTERS.length)]);
-            carNumber.setSecondLetter(LETTERS[rn.nextInt(LETTERS.length)]);
-            carNumber.setThirdLetter(LETTERS[rn.nextInt(LETTERS.length)]);
-
-
-        } return carNumber.toString();
+        return this.carNumber.toString();
     }
 
     public String nextNumber() {
@@ -74,10 +71,5 @@ public class CarNumberService {
     private String getNextLetter(String letter) {
         return LETTERS[Arrays.asList(LETTERS).indexOf(letter) + 1];
     }
-
-    private void checkOnRepetitions(CarNumber carNumber) {
-        if (randomNumberList.contains(carNumber)) {
-            nextNumber();
-        } else randomNumberList.add(carNumber);
-    }
 }
+
