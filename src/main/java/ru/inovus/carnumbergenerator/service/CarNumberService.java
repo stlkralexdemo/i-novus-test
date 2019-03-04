@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.inovus.carnumbergenerator.model.CarNumber;
 import ru.inovus.carnumbergenerator.repository.RandomCarNumberRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 @Service
