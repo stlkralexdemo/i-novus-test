@@ -12,6 +12,11 @@ public class CarNumberService {
 
     private static final String[] LETTERS = {"А", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
 
+
+    public void setCarNumber(CarNumber carNumber) {
+        this.carNumber = carNumber;
+    }
+
     private CarNumber carNumber = new CarNumber("А", "А", "А", 0);
 
     private final RandomCarNumberRepository repository;
@@ -52,9 +57,12 @@ public class CarNumberService {
             carNumber.setNumber(1);
         } else if (!carNumber.getSecondLetter().equals(lastLetter)) {
             carNumber.setSecondLetter(getNextLetter(carNumber.getSecondLetter()));
+            carNumber.setThirdLetter(LETTERS[0]);
             carNumber.setNumber(1);
         } else if (!carNumber.getFirstLetter().equals(lastLetter)) {
             carNumber.setFirstLetter(getNextLetter(carNumber.getFirstLetter()));
+            carNumber.setSecondLetter(LETTERS[0]);
+            carNumber.setThirdLetter(LETTERS[0]);
             carNumber.setNumber(1);
         } else {
             carNumber.setNumber(1);

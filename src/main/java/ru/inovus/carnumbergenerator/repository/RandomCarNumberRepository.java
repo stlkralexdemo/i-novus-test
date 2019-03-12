@@ -1,9 +1,9 @@
 package ru.inovus.carnumbergenerator.repository;
 
-import org.springframework.stereotype.Repository;
-import ru.inovus.carnumbergenerator.model.CarNumber;
+        import org.springframework.stereotype.Repository;
+        import ru.inovus.carnumbergenerator.model.CarNumber;
 
-import java.util.*;
+        import java.util.*;
 
 @Repository
 public class RandomCarNumberRepository {

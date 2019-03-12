@@ -1,6 +1,5 @@
 package ru.inovus.carnumbergenerator.service;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import ru.inovus.carnumbergenerator.model.CarNumber;
 import ru.inovus.carnumbergenerator.repository.RandomCarNumberRepository;
@@ -19,8 +18,6 @@ class CarNumberServiceTest {
     void setUp() {
 
         RandomCarNumberRepository repository = new RandomCarNumberRepository();
-        repository.add(
-                new CarNumber("А", "А", "А", 0));
         service = new CarNumberService(repository);
     }
 
@@ -34,9 +31,52 @@ class CarNumberServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void findNextNumber() {
+    void findNextNumberNew() {
+
+        service.setCarNumber(new CarNumber("А","А","Х", 999));
+
+        String result = service.nextNumber();
+
+        assertEquals("А001ВА 116 RUS", result);
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void findNextNumberTwo(){
+
+        service.setCarNumber(new CarNumber("А","Х","Х", 999));
+
+        String result = service.nextNumber();
+
+        assertEquals("В001АА 116 RUS", result);
+    }
+
+    @org.junit.jupiter.api.Test
+    void findNextNumberThree(){
+
+        service.setCarNumber(new CarNumber("Х","Х","Х", 999));
+
         String result = service.nextNumber();
 
         assertEquals("А001АА 116 RUS", result);
+    }
+
+    @org.junit.jupiter.api.Test
+    void findNextNumberFour(){
+
+        service.setCarNumber(new CarNumber("А","Х","А", 999));
+
+        String result = service.nextNumber();
+
+        assertEquals("А001ХВ 116 RUS", result);
+    }
+    @org.junit.jupiter.api.Test
+    void findNextNumberFive(){
+
+        service.setCarNumber(new CarNumber("А","Х","А", 900));
+
+        String result = service.nextNumber();
+
+        assertEquals("А901ХА 116 RUS", result);
     }
 }
